@@ -1,0 +1,211 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+  
+  :root {
+    --element_bground: #1d3557;
+    --button_bground: #457b9d;
+    --text_color_gold: #fca311;
+    --header_bgrounds: #d4e4f7;
+    --btn_text_colors: #fff;
+  }
+  
+  html,
+  body {
+    font-family: "Lato", sans-serif;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.4;
+    height: 100%;
+  background-color: #d4e4f748;
+  }
+  
+  .page-wrap {
+    min-height: 100%;
+    /* equal to footer height */
+    margin-bottom: -30px;
+  }
+  
+  .page-wrap:after {
+    content: "";
+    display: block;
+  }
+  
+  header {
+    text-align: center;
+    color: var(--button_bground);
+    background-color: var(--header_bgrounds);
+  }
+  
+  #topSection {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    background-color: rgba(52, 144, 156, 0.445);
+  }
+  
+  #topSection #newBook-Btn {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background: var(--button_bground);
+    color: var(--btn_text_colors);
+    border: none;
+    margin: 12px 0 12px 10%;
+  }
+  
+  #topSection #search {
+    margin: 12px 5% 12px 0;
+    width: 250px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: var(--btn_text_colors);
+    background-image: url("img/searchicon.png"); 
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    transition: width 0.4s ease-in-out;
+  }
+  
+  
+  #formSection {
+    background-color: var(--header_bgrounds);
+  }
+  
+  #formSection #form {
+    margin: auto;
+    width: 240px;
+    padding: 16px 25px 16px 25px;
+    background: var(--element_bground);
+    color: var(--text_color_gold);
+     display: none; 
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  }
+  
+  #formSection #closeForm-Btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    background: var(--button_bground);
+    color: var(--btn_text_colors);
+    text-align: center;
+    line-height: 22px;
+    border-radius: 15px;
+    cursor: pointer;
+    
+  }
+  
+  #formSection #submit-Btn {
+    align-self: center;
+    text-align: center;
+    background: var(--button_bground);
+    color: var(--btn_text_colors);
+    font-size: 16px;
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    width: 100%;
+    border: none;
+  }
+  
+  #formSection .setSpace {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  #formSection .setSpace label {
+    padding-bottom: 4px;
+  }
+  
+  #formSection .setSpace input {
+    padding: 6px;
+    text-indent: 6px;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 10px;
+  }
+  
+  #formSection .setSpace input[type="checkbox"] {
+    transform: scale(1.6);
+  }
+  
+  #formSection .setSpace span {
+    margin-right: 10px;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+  
+  #statusText {
+    text-align: center;
+    padding: 8px;
+    font-size: 18px;
+    color: var(--btn_text_colors);
+    width: 200px;
+    margin: auto;
+    display: none;
+    border-radius: 4px;
+  }
+  
+  #bookSection .wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-template-rows: auto;
+    grid-gap: 10px;
+    justify-content: center;
+  }
+  
+  #bookSection .bookContainer {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 10px;
+    background: var(--element_bground);
+    box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+      rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    width: 300px;
+  }
+  
+  #bookSection ol {
+    list-style-type: none;
+  }
+  
+  #bookSection li {
+    text-align: left;
+    margin: 8px 0px 8px 15px;
+    color: var(--text_color_gold);
+  }
+  
+  #bookSection .remove-Btn {
+    color: var(--btn_text_colors);
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 2px;
+    border: none;
+    margin: 10px 0px;
+    background: var(--button_bground);
+    cursor: pointer;
+  }
+  
+  .footer {
+    color: rgb(81, 146, 148);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-size: 18px;
+  }
+  
+  .footer,
+  .page-wrap:after {
+    height: 30px;
+  }
+  
+.fa-github-alt:hover{
+  text-decoration: underline;
+}
