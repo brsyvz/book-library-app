@@ -1,28 +1,60 @@
+(function() {
+
 const addBook = document.querySelector("#form");
-const removeBook = document.querySelector(".wrapper");
+const library = document.querySelector(".wrapper");
 const searchBook = document.querySelector("#search");
 const closeForm = document.querySelector("#closeForm-Btn");
-const displayForm = document.querySelector("#newBook-Btn");
+const newBookForm = document.querySelector("#newBook-Btn");
 
-addBook.addEventListener("submit", addBookToLibrary);
-removeBook.addEventListener("click", removeBookFromLibrary);
+addBook.addEventListener("submit", createBook);
+library.addEventListener("click", removeBook);
 searchBook.addEventListener("keyup", searchForBook);
-displayForm.addEventListener("click", displayBookForm);
-closeForm.addEventListener("click", closeBookForm);
+newBookForm.addEventListener("click", toggleNewBookForm);
+closeForm.addEventListener("click", closeNewBookForm);
 
-function Book(title, author, pages, read) {
+class Book {
+  constructor(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
+  }
 }
 
 (function storeBooks() {
-  const books = getBooks_Local();
-  books.forEach((book) => displayLibrary(book));
+  const books = Ls_getBooks();
+  books.forEach((book) => renderBook(book));
 })();
 
-function displayLibrary(book) {
+
+function createBook(e) {
+  const title = document.querySelector("#title").value;
+  const author = document.querySelector("#author").value;
+  const pages = document.querySelector("#pages").value;
+  const read = document.querySelector("#read").checked;
+ 
+  let readStatus = read;
+  if(readStatus === true) {
+    readStatus = "&#9989;";
+  }
+  else {
+    readStatus = "&#10060;";
+  }
+  const book = new Book(title, author, pages, readStatus);
+  e.preventDefault();
+  if (title === "" || author === "" || pages === "") {
+    showStatusMessage("noBlank");
+  } else {
+    renderBook(book);
+    Ls_setBooks(book);
+    clearFormFields();
+    showStatusMessage("add");
+    closeNewBookForm();
+  }
+}
+
+
+function renderBook(book) {
   const list = document.querySelector(".wrapper");
   const containerBox = document.createElement("div");
   containerBox.className = "bookContainer";
@@ -42,39 +74,15 @@ function displayLibrary(book) {
   row.firstElementChild.style.cssText = "text-align:center; margin-top:15px; margin-bottom:15px";
 }
 
-function addBookToLibrary(e) {
-  const title = document.querySelector("#title").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
-  const read = document.querySelector("#read").checked;
- 
-  let readStatus = read;
-  if(readStatus === true) {
-    readStatus = "&#9989;";
-  }
-  else {
-    readStatus = "&#10060;";
-  }
-  const book = new Book(title, author, pages, readStatus);
-  e.preventDefault();
-  if (title === "" || author === "" || pages === "") {
-    showStatusMessage("noBlank");
-  } else {
-    displayLibrary(book);
-    setBooks_Local(book);
-    clearFormFields();
-    showStatusMessage("add");
-    closeBookForm();
-  }
-}
 
-function removeBookFromLibrary(e) {
+
+function removeBook(e) {
     if (e.target.className == "remove-Btn") {
       e.target.parentElement.parentElement.remove();
     } else {
       return;
     }
-    removeBooks_Local(e.target.parentElement.firstElementChild.textContent);
+    Ls_removeBook(e.target.parentElement.firstElementChild.textContent);
     showStatusMessage("remove");
   }
   
@@ -102,13 +110,13 @@ function clearFormFields() {
   document.querySelector("#read").checked = false;
 }
 
-function displayBookForm() {
+function toggleNewBookForm() {
   form.classList.remove("animate__backOutUp");
   form.classList.add("animate__backInDown");
   form.style.display = "block";
 }
 
-function closeBookForm() {
+function closeNewBookForm() {
   form.classList.remove("animate__backInDown");
   form.classList.add("animate__backOutUp");
   setTimeout(() => {
@@ -150,7 +158,7 @@ function showStatusMessage(status) {
 }
 
 /* Handles Local Storage */
-function getBooks_Local() {
+function Ls_getBooks() {
   let books;
   if (localStorage.getItem("books") === null) {
     books = [];
@@ -160,14 +168,14 @@ function getBooks_Local() {
   return books;
 }
 
-function setBooks_Local(book) {
-  const books = getBooks_Local();
+function Ls_setBooks(book) {
+  const books = Ls_getBooks();
   books.push(book);
   localStorage.setItem("books", JSON.stringify(books));
 }
 
-function removeBooks_Local(title) {
-  const books = getBooks_Local();
+function Ls_removeBook(title) {
+  const books = Ls_getBooks();
   books.forEach((book, index) => {
     if (book.title === title) {
       books.splice(index, 1);
@@ -175,3 +183,5 @@ function removeBooks_Local(title) {
   });
   localStorage.setItem("books", JSON.stringify(books));
 }
+
+})();
