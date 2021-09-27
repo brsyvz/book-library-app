@@ -1,5 +1,5 @@
 
-<b>Live:</b> https://brsyvz.github.io/book_library_app/
+<b>Live:</b> https://brsyvz.github.io/book-library-app/
 
 ## Contents:
 1 - [About](#about)\
